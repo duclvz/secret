@@ -8,7 +8,7 @@ while getopts ":ht:l:" arg; do
             timer=${OPTARG}
             ;;
         l)
-            IFS=' ' read -r -a links <<< ${OPTARG}
+            links=${OPTARG}
             ;;
         h | *)
             usage
@@ -53,19 +53,12 @@ do
     echo "Starting virtual X display..."
     Xvfb :1 -screen 1 1024x768x16 -nolisten tcp & disown
     echo "Starting chrome TE viewer..."
-    declare -a chromePIDs
-    for i in ${!links[@]}
-    do
-        echo "Open link ${links[$i]}"
-        DISPLAY=:1.1 google-chrome --no-sandbox --new-window --user-data-dir="/root/chromeBotTE" --disable-popup-blocking --incognito ${links[$i]} & disown
-        chromePIDs[$i]=$!
-    done
+    echo "Open link $links"
+    DISPLAY=:1.1 google-chrome --no-sandbox --user-data-dir="/root/chromeBotTE" --disable-popup-blocking --incognito $links & disown
+    chromePID=$!
     sleep ${timer}
-    for element in ${chromePIDs[@]}
-    do
-        echo "Kill chrome PID $element"
-        kill $element
-    done
+    echo "Kill chrome PID $chromePID"
+    kill $chromePID
     echo "Killing virtual X display..."
     killall -9 Xvfb
     echo "Restart TE bots after ${timer} seconds!!"
