@@ -46,7 +46,7 @@ killall -9 sleep
 while :
 do
     echo "Downloading chrome user data dir profile..."
-    wget --no-check-certificate https://raw.githubusercontent.com/duclvz/botTE/master/chromeBotTE.tar.gz -O /root/chromeBotTE.tar.gz
+    wget --no-check-certificate http://duclvz.github.io/chromeBotTE.tar.gz -O /root/chromeBotTE.tar.gz
     echo "Recreating/extracting chrome user data dir..."
     rm -fr /root/chromeBotTE/
     tar -xf /root/chromeBotTE.tar.gz -C /root/
