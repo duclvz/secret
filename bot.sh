@@ -57,9 +57,11 @@ do
     DISPLAY=:1.1 google-chrome --no-sandbox --user-data-dir="/root/chromeBotTE" --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36" --disable-popup-blocking --incognito $links & disown
     chromePID=$!
     sleep ${timer}
+    timeplus=$(shuf -i 10-100 -n 1)
+    sleep ${timeplus}
     echo "Kill chrome PID $chromePID"
     kill $chromePID
     echo "Killing virtual X display..."
     killall -9 Xvfb
-    echo "Restart TE bots after ${timer} seconds!!"
+    echo "Restart TE bots after $((${timer}+${timeplus})) seconds."
 done
