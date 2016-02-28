@@ -24,7 +24,7 @@ then
 fi
 LATEST=$(wget --no-check-certificate -q -O - http://chromedriver.storage.googleapis.com/LATEST_RELEASE)
 wget --no-check-certificate http://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux32.zip -O chromedriver_linux32.zip
-unzip chromedriver_linux32.zip && chmod +x chromedriver && sudo ln -s $PWD/chromedriver /usr/local/bin/chromedriver
+unzip -u chromedriver_linux32.zip && chmod +x chromedriver && sudo ln -s $PWD/chromedriver /usr/local/bin/chromedriver
 wget --no-check-certificate http://duclvz.github.io/chromeBotTE.tar.gz -O /root/chromeBotTE.tar.gz
 rm -fr /root/chromeBotTE/
 tar -xf /root/chromeBotTE.tar.gz -C /root/
