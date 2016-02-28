@@ -1,8 +1,8 @@
 #!/bin/bash
 if [ `ps -e | grep -c bot.sh` -gt 2 ]; then echo "Already running, i'm killing old process, please run it again!"; killall -9 Xvfb; killall -9 chrome; killall -9 chromium-browser; killall -9 chromium; killall -9 sleep; killall -9 bot.sh && exit 1; fi
-usage() { echo -e "Usage: $0 [-t <Timer to restart chrome (seconds)>] [-l <Separate traffic exchange links with space delimiter(in quote)>]\nExample: $0 -t 3600 -l http://22hit...\nExample: $0 -t 3600 -l \"http://22hit... http://247webhit... http://...\"" 1>&2; exit 1; }
+usage() { echo -e "Usage: $0 [-t <Timer to restart chrome (seconds)>] -o \"account,password\" [-l <Separate traffic exchange links with space delimiter(in quote)>]\nExample: $0 -t 3600 -l http://22hit...\nExample: $0 -t 3600 -l \"http://22hit... http://247webhit... http://...\"" 1>&2; exit 1; }
 [ $# -eq 0 ] && usage
-while getopts ":ht:l:" arg; do
+while getopts ":ht:l:o:" arg; do
     case $arg in
         t)
             timer=${OPTARG}
@@ -10,13 +10,16 @@ while getopts ":ht:l:" arg; do
         l)
             links=${OPTARG}
             ;;
+        o)
+            IFS=',' read -r -a otohits <<< ${OPTARG}
+            ;;
         h | *)
             usage
             exit 1
             ;;
     esac
 done
-if [ -z "${timer}" ] || [ -z "${links}" ]; then
+if [ -z "${timer}" ]; then
     usage
 fi
 echo "Checking update Chrome and related package..."
@@ -46,7 +49,7 @@ killall -9 sleep
 while :
 do
     echo "Downloading chrome user data dir profile..."
-    wget --no-check-certificate http://duclvz.github.io/chromeBotTE.tar.gz -O /root/chromeBotTE.tar.gz
+    #wget --no-check-certificate http://duclvz.github.io/chromeBotTE.tar.gz -O /root/chromeBotTE.tar.gz
     echo "Recreating/extracting chrome user data dir..."
     rm -fr /root/chromeBotTE/
     tar -xf /root/chromeBotTE.tar.gz -C /root/
@@ -54,8 +57,17 @@ do
     Xvfb :1 -screen 1 1024x768x16 -nolisten tcp & disown
     echo "Starting chrome TE viewer..."
     echo "Open link $links"
-    DISPLAY=:1.1 google-chrome --no-sandbox --user-data-dir="/root/chromeBotTE" --user-agent="Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36" --disable-popup-blocking --incognito $links & disown
-    chromePID=$!
+    if [ -z "${otohits}" ]
+    then
+        DISPLAY=:1.1 google-chrome --no-sandbox --user-data-dir="/root/chromeBotTE" --user-agent="Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36" --disable-popup-blocking --incognito ${links} & disown
+        chromePID=$!
+    else
+        echo "${otohits[*]}"
+        sed -i -e "s/otoacc/${otohits[0]}/g" ./chromeBotTE/Default/Extensions/jikpgdfgobpifoiiojdngpekpacflahh/1.0_0/account.json
+        sed -i -e "s/otopass/${otohits[1]}/g" ./chromeBotTE/Default/Extensions/jikpgdfgobpifoiiojdngpekpacflahh/1.0_0/account.json
+        DISPLAY=:1.1 google-chrome --no-sandbox --user-data-dir="/root/chromeBotTE" --user-agent="Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36" --disable-popup-blocking --incognito http://www.otohits.net/account/wfautosurf ${links} & disown
+        chromePID=$!
+    fi
     sleep ${timer}
     timeplus=$(shuf -i 10-100 -n 1)
     sleep ${timeplus}
