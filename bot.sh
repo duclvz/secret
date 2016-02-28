@@ -62,9 +62,8 @@ do
         DISPLAY=:1.1 google-chrome --no-sandbox --user-data-dir="/root/chromeBotTE" --user-agent="Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36" --disable-popup-blocking --incognito ${links} & disown
         chromePID=$!
     else
-        echo "${otohits[*]}"
-        sed -i -e "s/otoacc/${otohits[0]}/g" ./chromeBotTE/Default/Extensions/jikpgdfgobpifoiiojdngpekpacflahh/1.0_0/account.json
-        sed -i -e "s/otopass/${otohits[1]}/g" ./chromeBotTE/Default/Extensions/jikpgdfgobpifoiiojdngpekpacflahh/1.0_0/account.json
+        sed -i "s/otoacc/${otohits[0]}/g" ./chromeBotTE/Default/Extensions/jikpgdfgobpifoiiojdngpekpacflahh/1.0_0/account.json
+        sed -i "s/otopass/${otohits[1]}/g" ./chromeBotTE/Default/Extensions/jikpgdfgobpifoiiojdngpekpacflahh/1.0_0/account.json
         DISPLAY=:1.1 google-chrome --no-sandbox --user-data-dir="/root/chromeBotTE" --user-agent="Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36" --disable-popup-blocking --incognito http://www.otohits.net/account/wfautosurf ${links} & disown
         chromePID=$!
     fi
