@@ -15,16 +15,18 @@ apt-get install -y libnss3 libgconf-2-4
 apt-get install -y google-chrome-stable
 dpkg --configure -a
 apt-get install -f -y
-pip install -U selenium
-pip install -U pyvirtualdisplay
 if [[ `lsb_release -rs` == "12.04" ]]
 then
     apt-get install -y defoma x-ttcidfont-conf
     (cd /var/lib/defoma/x-ttcidfont-conf.d/dirs/TrueType && mkfontdir > fonts.dir)
 fi
+pip install -U pyvirtualdisplay selenium
 LATEST=$(wget --no-check-certificate -q -O - http://chromedriver.storage.googleapis.com/LATEST_RELEASE)
 wget --no-check-certificate http://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux32.zip -O chromedriver_linux32.zip
-unzip -u chromedriver_linux32.zip && chmod +x chromedriver && sudo ln -s $PWD/chromedriver /usr/local/bin/chromedriver
+unzip -u chromedriver_linux32.zip && chmod +x chromedriver
+mv -f chromedriver /usr/local/share/chromedriver
+ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
+ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
 wget --no-check-certificate http://duclvz.github.io/chromeBotTE.tar.gz -O /root/chromeBotTE.tar.gz
 rm -fr /root/chromeBotTE/
 tar -xf /root/chromeBotTE.tar.gz -C /root/
