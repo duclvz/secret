@@ -11,7 +11,7 @@ while getopts ":ht:l:o:" arg; do
             links=${OPTARG}
             ;;
         o)
-            IFS=',' read -r -a otohits <<< ${OPTARG}
+            IFS=', ' read -r -a otohits <<< ${OPTARG}
             ;;
         h | *)
             usage
