@@ -56,11 +56,12 @@ except:
 # Loop
 for x in xrange(1, listlen):
     print('Viewing video '+youtube.title)
+    print(youtube.current_url)
     playVideo()
     time.sleep(3)
     try:
         rdper=percent();
-        print('Wait view video with rate'+str(rdper))
+        print('Wait view video with rate: '+str(rdper))
         time.sleep(float(youtube.find_element_by_tag_name('video').get_attribute('duration'))*rdper)
         youtube.save_screenshot('screenie.png')
         nextVideo()
