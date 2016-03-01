@@ -55,10 +55,10 @@ except:
         print('Error when fetch playlist length')
 # Loop
 for x in xrange(1, listlen):
-    print('Viewing video '+youtube.title)
-    print(youtube.current_url)
     playVideo()
     time.sleep(3)
+    print('Viewing video '+youtube.title)
+    print(youtube.current_url)
     try:
         rdper=percent();
         print('Wait view video with rate: '+str(rdper))
