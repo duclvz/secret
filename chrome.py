@@ -45,7 +45,7 @@ def percent():
         return random.uniform(65,85)/100
     else:
         return random.uniform(20,100)/100
-# Lấy độ dài playlist
+# Fetch playlist length
 try:
     listlen = int(youtube.find_element_by_css_selector('div._mpr').text.split(' / ')[1])
 except:
