@@ -22,24 +22,24 @@ youtube.get('https://www.youtube.com/watch?v=uYRuxz_UIOI&list=PLNFHZ147pUItjKgOD
 def playVideo():
     try:
         youtube.find_element_by_css_selector('div[aria-label="Play"]').click()
-        print('Đã chạy Video - div[aria-label="Play"]')
+        print('Started Video - div[aria-label="Play"]')
     except:
         try:
             youtube.find_element_by_css_selector('a[title="Play video"]').click()
-            print('Đã chạy Video - a[title="Play video"]')
+            print('Started Video - a[title="Play video"]')
         except:
-            print("Lỗi khi click Video")
+            print("Error when click Video")
 
 def nextVideo():
     try:
         youtube.find_element_by_css_selector('.ytp-next-button.ytp-button').click()
-        print('Đã Next Video')
+        print('Nexted Video')
     except:
         try:
             youtube.find_element_by_css_selector('a[title="Next video"]').click()
-            print('Đã Next Video')
+            print('Nexted Video')
         except:
-            print('Lỗi khi Click Next Video')
+            print('Error when click Next Video')
 def percent():
     if random.uniform(0,100)>20:
         return random.uniform(65,85)/100
@@ -52,20 +52,20 @@ except:
     try:
         listlen = int(youtube.find_element_by_css_selector('span#playlist-length').text.split(' ')[0])
     except:
-        print('Lỗi khi lấy độ dài playlist')
+        print('Error when fetch playlist length')
 # Loop
 for x in xrange(1, listlen):
-    print('Đang xem video '+youtube.title)
+    print('Viewing video '+youtube.title)
     playVideo()
     time.sleep(3)
     try:
         rdper=percent();
-        print('Chờ xem video với tỉ lệ thời gian '+str(rdper))
+        print('Wait view video with rate'+str(rdper))
         time.sleep(float(youtube.find_element_by_tag_name('video').get_attribute('duration'))*rdper)
         youtube.save_screenshot('screenie.png')
         nextVideo()
     except:
-        print('Lỗi khi chờ xem video')
+        print('Error when viewing video with rate')
 
 
         
