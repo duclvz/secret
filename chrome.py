@@ -66,6 +66,3 @@ for x in xrange(1, listlen):
         nextVideo()
     except:
         print('Error when viewing video with rate')
-
-
-        
