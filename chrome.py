@@ -55,6 +55,7 @@ except:
         print('Error when fetch playlist length')
 # Loop
 for x in xrange(0, listlen):
+    print('--------------')
     playVideo()
     time.sleep(3)
     print('Viewing video '+youtube.title)
