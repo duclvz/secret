@@ -54,7 +54,7 @@ except:
     except:
         print('Error when fetch playlist length')
 # Loop
-for x in xrange(1, listlen):
+for x in xrange(0, listlen):
     playVideo()
     time.sleep(3)
     print('Viewing video '+youtube.title)
@@ -67,3 +67,6 @@ for x in xrange(1, listlen):
         nextVideo()
     except:
         print('Error when viewing video with rate')
+youtube.quit()
+display.stop()
+print('Stopped Chrome Selenium and Xvfb')
