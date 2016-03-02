@@ -47,7 +47,7 @@ def percent():
         return random.uniform(20,100)/100
 # Fetch playlist length
 try:
-    listlen = int(youtube.find_element_by_css_selector('div._mpr').text.split(' / ')[1])
+    listlen = int(youtube.find_element_by_css_selector('div._mqr').text.split(' / ')[1])
 except:
     try:
         listlen = int(youtube.find_element_by_css_selector('span#playlist-length').text.split(' ')[0])
