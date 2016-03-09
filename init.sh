@@ -22,8 +22,8 @@ then
 fi
 pip install -U pyvirtualdisplay selenium
 LATEST=$(wget --no-check-certificate -q -O - http://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-wget --no-check-certificate http://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux32.zip -O chromedriver_linux32.zip
-unzip -u chromedriver_linux32.zip && chmod +x chromedriver
+wget --no-check-certificate http://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip -O chromedriver_linux64.zip
+unzip -u chromedriver_linux64.zip && chmod +x chromedriver
 mv -f chromedriver /usr/local/share/chromedriver
 ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
 ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
