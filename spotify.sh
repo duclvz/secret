@@ -52,7 +52,7 @@ do
     wget --no-check-certificate http://duclvz.github.io/chromeBotSpotify.tar.gz -O /root/chromeBotSpotify.tar.gz
     echo "Recreating/extracting chrome user data dir..."
     rm -fr /root/chromeBotSpotify/
-    tar -xf /root/chromeBotSpotify.tar.gz -C /root/
+    tar -xzf /root/chromeBotSpotify.tar.gz -C /root/
     echo "Starting virtual X display..."
     Xvfb :2 -screen 1 1024x768x16 -nolisten tcp & disown
     echo "Starting chrome TE viewer..."
