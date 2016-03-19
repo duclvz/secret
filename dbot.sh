@@ -1,9 +1,10 @@
 #!/bin/bash
-if [ `ps -e | grep -c bot.sh` -gt 2 ]; then echo "Already running, i'm killing old process, please run it again!"; killall -9 Xvfb; killall -9 chrome; killall -9 chromium-browser; killall -9 chromium; killall -9 sleep; killall -9 bot.sh && exit 1; fi
+if [ `ps -e | grep -c dbot.sh` -gt 2 ]; then echo "Already running, i'm killing old process, please run it again!"; killall -9 Xvfb; killall -9 chrome; killall -9 chromium-browser; killall -9 chromium; killall -9 sleep; killall -9 dbot.sh && exit 1; fi
 usage() { echo -e "Usage: $0 [-t <Timer to restart chrome (seconds)>] -o \"account,password\" [-l <Separate traffic exchange links with space delimiter(in quote)>]\nExample: $0 -t 3600 -l http://22hit...\nExample: $0 -t 3600 -l \"http://22hit... http://247webhit... http://...\"\nExample: $0 -t 3600 -o \"otohit_account,otohits_password\" -l \"http://22hit...\"\nExample: $0 -t 3600 -o \"otohit_account,otohits_password\"" 1>&2; exit 1; }
 [ $# -eq 0 ] && usage
 otolink=""
-while getopts ":ht:l:o:" arg; do
+ytmlink=""
+while getopts ":ht:l:o:y:" arg; do
     case $arg in
         t)
             timer=${OPTARG}
@@ -14,6 +15,10 @@ while getopts ":ht:l:o:" arg; do
         o)
             IFS=', ' read -r -a otohits <<< ${OPTARG}
             otolink="http://www.otohits.net/account/wfautosurf"
+            ;;
+        y)
+            IFS=', ' read -r -a ytmonster <<< ${OPTARG}
+            ytmlink="http://www.ytmonster.net/login"
             ;;
         h | *)
             usage
@@ -64,7 +69,12 @@ do
         sed -i "s/otoacc/${otohits[0]}/g" ./chromeBotTE/Default/Extensions/jikpgdfgobpifoiiojdngpekpacflahh/1.0_0/account.json
         sed -i "s/otopass/${otohits[1]}/g" ./chromeBotTE/Default/Extensions/jikpgdfgobpifoiiojdngpekpacflahh/1.0_0/account.json
     fi
-    DISPLAY=:2.1 google-chrome --no-sandbox --user-data-dir="/root/chromeBotTE" --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36" --disable-popup-blocking --incognito ${otolink} ${links} & disown
+    if [ ! -z "${ytmonster}" ]
+    then
+        sed -i "s/ytmacc/${ytmonster[0]}/g" ./chromeBotTE/Default/Extensions/jikpgdfgobpifoiiojdngpekpacflahh/1.0_0/account.json
+        sed -i "s/ytmpass/${ytmonster[1]}/g" ./chromeBotTE/Default/Extensions/jikpgdfgobpifoiiojdngpekpacflahh/1.0_0/account.json
+    fi
+    DISPLAY=:2.1 google-chrome --no-sandbox --user-data-dir="/root/chromeBotTE" --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36" --disable-popup-blocking --incognito ${ytmlink} ${otolink} ${links} & disown
     chromePID=$!
     sleep ${timer}
     timeplus=$(shuf -i 10-100 -n 1)
