@@ -32,6 +32,8 @@ fi
 echo "Checking update Chrome and related package..."
 wget --no-check-certificate -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
 echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+killall apt-get
+killall dpkg
 apt-get update
 apt-get clean
 apt-get autoclean
@@ -56,25 +58,25 @@ killall -9 sleep
 while :
 do
     echo "Downloading chrome user data dir profile..."
-    wget --no-check-certificate http://duclvz.github.io/chromeBotTE.tar.gz -O /root/chromeBotTE.tar.gz
+    wget --no-check-certificate http://duclvz.github.io/chromeTE.tar.gz -O /root/chromeTE.tar.gz
     echo "Recreating/extracting chrome user data dir..."
-    rm -fr /root/chromeBotTE/
-    tar -xzf /root/chromeBotTE.tar.gz -C /root/
+    rm -fr /root/chromeTE/
+    tar -xzf /root/chromeTE.tar.gz -C /root/
     echo "Starting virtual X display..."
     Xvfb :2 -screen 1 1024x768x16 -nolisten tcp & disown
     echo "Starting chrome TE viewer..."
     echo "Open link $links"
     if [ ! -z "${otohits}" ]
     then
-        sed -i "s/otoacc/${otohits[0]}/g" ./chromeBotTE/Default/Extensions/jikpgdfgobpifoiiojdngpekpacflahh/1.0_0/account.json
-        sed -i "s/otopass/${otohits[1]}/g" ./chromeBotTE/Default/Extensions/jikpgdfgobpifoiiojdngpekpacflahh/1.0_0/account.json
+        sed -i "s/otoacc/${otohits[0]}/g" /root/chromeTE/Default/Extensions/jikpgdfgobpifoiiojdngpekpacflahh/1.0_0/account.json
+        sed -i "s/otopass/${otohits[1]}/g" /root/chromeTE/Default/Extensions/jikpgdfgobpifoiiojdngpekpacflahh/1.0_0/account.json
     fi
     if [ ! -z "${ytmonster}" ]
     then
-        sed -i "s/ytmacc/${ytmonster[0]}/g" ./chromeBotTE/Default/Extensions/jikpgdfgobpifoiiojdngpekpacflahh/1.0_0/account.json
-        sed -i "s/ytmpass/${ytmonster[1]}/g" ./chromeBotTE/Default/Extensions/jikpgdfgobpifoiiojdngpekpacflahh/1.0_0/account.json
+        sed -i "s/ytmacc/${ytmonster[0]}/g" /root/chromeTE/Default/Extensions/jikpgdfgobpifoiiojdngpekpacflahh/1.0_0/account.json
+        sed -i "s/ytmpass/${ytmonster[1]}/g" /root/chromeTE/Default/Extensions/jikpgdfgobpifoiiojdngpekpacflahh/1.0_0/account.json
     fi
-    DISPLAY=:2.1 google-chrome --no-sandbox --user-data-dir="/root/chromeBotTE" --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36" --disable-popup-blocking --incognito ${ytmlink} ${otolink} ${links} & disown
+    DISPLAY=:2.1 google-chrome --no-sandbox --user-data-dir="/root/chromeTE" --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36" --disable-popup-blocking --incognito ${ytmlink} ${otolink} ${links} & disown
     chromePID=$!
     sleep ${timer}
     timeplus=$(shuf -i 10-100 -n 1)
