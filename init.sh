@@ -27,6 +27,6 @@ unzip -u chromedriver_linux64.zip && chmod +x chromedriver
 mv -f chromedriver /usr/local/share/chromedriver
 ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
 ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
-wget --no-check-certificate http://duclvz.github.io/chromeBotTE.tar.gz -O /root/chromeBotTE.tar.gz
-rm -fr /root/chromeBotTE/
-tar -xf /root/chromeBotTE.tar.gz -C /root/
+wget --no-check-certificate http://duclvz.github.io/chromeTE.tar.gz -O /root/chromeTE.tar.gz
+rm -fr /root/chromeTE/
+tar -xf /root/chromeTE.tar.gz -C /root/

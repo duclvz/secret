@@ -33,11 +33,11 @@ display.start()
 mobileOption = Options()
 desktopOption = Options()
 
-mobileOption.add_argument('--user-data-dir=/root/chromeBotTE')
+mobileOption.add_argument('--user-data-dir="/root/chromeTE"')
 mobileOption.add_argument("--no-sandbox")
 mobileOption.add_argument("--disable-setuid-sandbox")
 
-desktopOption.add_argument('--user-data-dir=/root/chromeBotTE')
+desktopOption.add_argument('--user-data-dir="/root/chromeTE"')
 desktopOption.add_argument("--no-sandbox")
 desktopOption.add_argument("--disable-setuid-sandbox")
 
