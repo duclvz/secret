@@ -101,7 +101,7 @@ def playVideo(link):
     except:
         print('Error when viewing video with rate(get frome var) => Sleep with 300 sec * rate')
         youtube.save_screenshot('screenie.png')
-        time.sleep(300*rdper)
+        time.sleep(250*rdper)
 # Loop
 for link in links:
     print('--------------')
