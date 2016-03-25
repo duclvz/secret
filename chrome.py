@@ -29,30 +29,7 @@ desktopAgents = ["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (
 mobileRes=[{ "width": 750, "height": 1334, "pixelRatio": 2.0 },{ "width": 640, "height": 1136, "pixelRatio": 2.0 },{ "width": 640, "height": 960, "pixelRatio": 2.0 },{ "width": 1440, "height": 2560, "pixelRatio": 4.0 },{ "width": 768, "height": 1280, "pixelRatio": 2.0 },{ "width": 720, "height": 1280, "pixelRatio": 2.0 },{ "width": 800, "height": 1280, "pixelRatio": 2.0 },{ "width": 1080, "height": 1920, "pixelRatio": 3.0 },{ "width": 540, "height": 960, "pixelRatio": 1.5 },{ "width": 480, "height": 800, "pixelRatio": 1.5 },{ "width": 720, "height": 1200, "pixelRatio": 2.0 }]
 
 youtube = None
-def stopYT():
-    try:
-        youtube.quit()
-    except:
-        print('Error when quit Chrome')
-def createYT():
-    stopYT()
-    mobileOption = Options()
-    desktopOption = Options()
-    mobileOption.add_argument('--user-data-dir="/root/chromeTE"')
-    mobileOption.add_argument("--no-sandbox")
-    mobileOption.add_argument("--disable-setuid-sandbox")
-    desktopOption.add_argument('--user-data-dir="/root/chromeTE"')
-    desktopOption.add_argument("--no-sandbox")
-    desktopOption.add_argument("--disable-setuid-sandbox")
-    mobile_emulation = {
-        "deviceMetrics": random.choice(mobileRes),
-        "userAgent": random.choice(mobileAgents) }
-    mobileOption.add_experimental_option("mobileEmulation", mobile_emulation)
-    desktopOption.add_argument('--user-agent='+random.choice(desktopAgents))
-    if random.uniform(0,100)>20:
-        youtube = webdriver.Chrome(chrome_options = desktopOption)
-    else:
-        youtube = webdriver.Chrome(chrome_options = mobileOption)
+    
 def percent():
     if random.uniform(0,100)>20:
         return random.uniform(65,85)/100
@@ -103,9 +80,32 @@ def playVideo(link):
 for x in xrange(0,len(links)):
     print('--------------')
     if x%2==0:
-        createYT()
+        try:
+            youtube.quit()
+        except:
+            print('Error when quit Chrome')
+        mobileOption = Options()
+        desktopOption = Options()
+        mobileOption.add_argument('--user-data-dir="/root/chromeTE"')
+        mobileOption.add_argument("--no-sandbox")
+        mobileOption.add_argument("--disable-setuid-sandbox")
+        desktopOption.add_argument('--user-data-dir="/root/chromeTE"')
+        desktopOption.add_argument("--no-sandbox")
+        desktopOption.add_argument("--disable-setuid-sandbox")
+        mobile_emulation = {
+            "deviceMetrics": random.choice(mobileRes),
+            "userAgent": random.choice(mobileAgents) }
+        mobileOption.add_experimental_option("mobileEmulation", mobile_emulation)
+        desktopOption.add_argument('--user-agent='+random.choice(desktopAgents))
+        if random.uniform(0,100)>20:
+            youtube = webdriver.Chrome(chrome_options = desktopOption)
+        else:
+            youtube = webdriver.Chrome(chrome_options = mobileOption)
     playVideo(links[x])
 
-stopYT()
+try:
+    youtube.quit()
+except:
+    print('Error when quit Chrome')
 display.stop()
 print('Stopped Chrome Selenium and Xvfb')
