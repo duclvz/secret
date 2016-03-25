@@ -56,8 +56,8 @@ if [ -z "${browser}" ]; then
     echo "Sorry, this script does not support your OS, please use Ubuntu/Debian Linux OS!"
     exit 1
 fi
-apt-get install -y pepperflashplugin-nonfree
-update-pepperflashplugin-nonfree --install
+#apt-get install -y pepperflashplugin-nonfree
+#update-pepperflashplugin-nonfree --install
 #apt-get install -y google-chrome-stable
 dpkg --configure -a
 apt-get install -f -y
