@@ -28,7 +28,7 @@ done
 if [ -z "${timer}" ]; then
     usage
 fi
-echo "Checking update Chromium and related package..."
+echo "Checking update Chrome/Chromium and related package..."
 echo "Killing old chrome/chromium and virtual X display..."
 killall apt-get
 killall dpkg
