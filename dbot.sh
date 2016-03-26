@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ `ps -e | grep -c bot.sh` -gt 2 ]; then echo "Already running, i'm killing old process!"; pkill -9 -o chrome; killall -9 chrome; pkill -9 -o chromium; killall -9 chromium; pkill -9 -o chromium-browser; killall -9 chromium-browser; killall -9 Xvfb; pkill -9 -o bot.sh; fi
+if [ `ps -e | grep -c dbot.sh` -gt 2 ]; then echo "Already running, i'm killing old process!"; pkill -9 -o chrome; killall -9 chrome; pkill -9 -o chromium; killall -9 chromium; pkill -9 -o chromium-browser; killall -9 chromium-browser; killall -9 Xvfb; pkill -9 -o dbot.sh; fi
 usage() { echo -e "Usage: $0 [-t <Timer to restart chrome (seconds)>] -o \"account,password\" [-l <Separate traffic exchange links with space delimiter(in quote)>]\nExample: $0 -t 3600 -l http://22hit...\nExample: $0 -t 3600 -l \"http://22hit... http://247webhit... http://...\"\nExample: $0 -t 3600 -o \"otohit_account,otohits_password\" -l \"http://22hit...\"\nExample: $0 -t 3600 -o \"otohit_account,otohits_password\"" 1>&2; exit 1; }
 [ $# -eq 0 ] && usage
 otolink=""
