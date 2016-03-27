@@ -39,10 +39,10 @@ def percent():
 def playVideo(link):
     try:
         if random.uniform(0,100)<80:
-            if random.uniform(0,100)<50:
-                youtube.get('https://www.google.com/url?sa=t&url=https://www.youtube.com/watch?v='+link)
-            elif random.uniform(0,100)<80:
+            if random.uniform(0,100)<60:
                 youtube.get('http://facebook.com/l/'+''.join(random.SystemRandom().choice(string.ascii_letters) for _ in range(9))+'/https://www.youtube.com/watch?v='+link)
+            elif random.uniform(0,100)<50:
+                youtube.get('https://www.google.com/url?sa=t&url=https://www.youtube.com/watch?v='+link)
             else:
                 youtube.get('https://plus.google.com/+LoLProPlaysChanel/posts')
                 youtube.execute_script('window.open("https://www.youtube.com/watch?v='+link+'&feature=autoshare","_self")')
