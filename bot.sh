@@ -81,8 +81,6 @@ then
     apt-get install -y defoma x-ttcidfont-conf
     (cd /var/lib/defoma/x-ttcidfont-conf.d/dirs/TrueType && mkfontdir > fonts.dir)
 fi
-desktopAgents=("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36 Edge/12.0" "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.10240" "Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36" "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.67 Safari/537.36" "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36" "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36" "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36" "Mozilla/5.0 (Windows NT 6.1; en-US) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36" "Mozilla/5.0 (X11; Linux i686 (x86_64)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/33.0.1750.152 Chrome/49.0.2623.87 Safari/537.36")
-RANDOM=$$$(date +%s)
 while :
 do
     echo "Downloading chrome user data dir profile..."
@@ -99,7 +97,7 @@ do
         sed -i "s/otoacc/${otohits[0]}/g" /root/chromeTE/Default/Extensions/jikpgdfgobpifoiiojdngpekpacflahh/1.0_0/account.json
         sed -i "s/otopass/${otohits[1]}/g" /root/chromeTE/Default/Extensions/jikpgdfgobpifoiiojdngpekpacflahh/1.0_0/account.json
     fi
-    DISPLAY=:2.1 ${browser} --no-sandbox --user-data-dir="/root/chromeTE" --user-agent=\"${desktopAgents[$RANDOM % ${#desktopAgents[@]}]}\" --disable-popup-blocking --incognito ${otolink} ${links} & disown
+    DISPLAY=:2.1 ${browser} --no-sandbox --user-data-dir="/root/chromeTE" --user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36" --disable-popup-blocking --incognito ${otolink} ${links} & disown
     browserPID=$!
     sleep ${timer}
     timeplus=$(shuf -i 10-100 -n 1)
