@@ -8,8 +8,8 @@ var rl = readline.createInterface({
 });
 
 var credential = {
-	client_id: '817888159980-1ms151b09s5amau08cmdu15tb8qdgpqe.apps.googleusercontent.com',
-	client_secret: 'dBzIWvcQ77YU0wPY-W2sw_FO',
+	client_id: '197517672022-vm8g45cqp92oa8tfue1cklkgqfjg05rt.apps.googleusercontent.com',
+	client_secret: 'cmYoue69Ao6jvSodhgWQPMBs',
 	redirect_uri: 'urn:ietf:wg:oauth:2.0:oob'
 };
 var oauth2Client = null;
