@@ -1,3 +1,13 @@
+// ==UserScript==
+// @name         Play Ads Live Streaming
+// @namespace    duclvz
+// @version      0.1
+// @description  try to take over the world!
+// @author       You
+// @match        https://www.youtube.com/live*
+// @grant        unsafeWindow
+// ==/UserScript==
+
 unsafeWindow.playAds = null;
 unsafeWindow.timeOut = null;
 unsafeWindow.countdown = null;
