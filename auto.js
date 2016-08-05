@@ -43,14 +43,12 @@ unsafeWindow.countAds = 0;
         document.querySelector('#autoAds').setAttribute('class', 'yt-uix-button yt-uix-button-size-default yt-uix-button-default');
         document.querySelector('#autoButton').textContent = 'Auto';
     };
+    var div = document.createElement('div');
+    div.innerHTML = '<button id="autoAds" onclick="startAuto()" type="button" class="yt-uix-button yt-uix-button-size-default yt-uix-button-default"><span id="autoButton" class="yt-uix-button-content">Auto</span> | <span id="countAds">0</span> | <span id="autoTimer"></span><button>';
     if (window.location.href.indexOf("live_dashboard") > -1) {
-        var div = document.createElement('div');
-        div.innerHTML = '<button id="autoAds" onclick="startAuto()" type="button" class="yt-uix-button yt-uix-button-size-default yt-uix-button-default"><span id="autoButton" class="yt-uix-button-content">Auto</span> | <span id="countAds">0</span> | <span id="autoTimer"></span><button>';
         document.querySelector('div.dashboard-control.player-controls-buttons').insertBefore(div.firstChild, document.querySelector('div.dashboard-control.player-controls-buttons').childNodes[0]);
     }
     if (window.location.href.indexOf("live_event_analytics") > -1) {
-        var div = document.createElement('div');
-        div.innerHTML = '<button id="autoAds" onclick="startAuto()" type="button" class="yt-uix-button yt-uix-button-size-default yt-uix-button-default"><span id="autoButton" class="yt-uix-button-content">Auto</span> | <span id="countAds">0</span> | <span id="autoTimer"></span><button>';
         document.querySelector('#live-rtd-analytics-mode-content').insertBefore(div.firstChild,document.querySelector('#live-rtd-analytics-mode-content').childNodes[2]);
     }
     unsafeWindow.playAds = function() {
