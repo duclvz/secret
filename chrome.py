@@ -25,16 +25,9 @@ display = Display(visible=0, size=(1280, 720))
 display.start()
 
 youtube = None
-    
-def percent():
-    if random.uniform(0,100)>20:
-        return random.uniform(65,85)/100
-    else:
-        return random.uniform(30,100)/100
 
 def playVideo(link):
-    youtube.get('http://facebook.com/l/'+''.join(random.SystemRandom().choice(string.ascii_letters) for _ in range(9))+'/https://www.youtube.com/watch?v='+link)
-    youtube.find_element_by_css_selector('div[aria-label="Play"]').click()
+    youtube.get('https://www.youtube.com/watch?v='+link)
     print('Started Video - div[aria-label="Play"]')
     time.sleep(3)
     print('Viewing video Url: '+youtube.current_url)
@@ -42,9 +35,10 @@ def playVideo(link):
     i = 0
     while i < 120:
         try:
-            time.sleep(5)
+            time.sleep(7)
             i=i+5
-            youtube.find_element_by_css_selector('div.videoAdUiVisitAdvertiserLink').click()
+            youtube.find_element_by_css_selector('div.videoAdUiVisitAdvertiserLinkText').click()
+            youtube.save_screenshot('screenie2.png')
         except:
             print('Error when click ads')
 # Loop
