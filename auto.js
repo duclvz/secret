@@ -75,3 +75,15 @@ unsafeWindow.countAds = 0;
         }
     };
 })();
+
+playAds = function (){
+            document.querySelector('button#submit-ad-button').click();
+            console.log('Played Ads');
+            var current = parseInt(document.querySelector('#live-rtd-info-button-current-streams-content').innerHTML);
+            if (current > 70) {
+                setTimeout(playAds, 240000);
+            } else {
+                setTimeout(playAds, 240000*70/current);
+            }
+        };
+playAds();
