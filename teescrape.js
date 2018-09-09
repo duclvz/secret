@@ -3,9 +3,13 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
-// @author       You
+// @author       duclvz
+// @run-at       document-end
+// @downloadURL  http://duclvz.github.io/teescrape.js
 // @match        https://www.teepublic.com/t-shirts?*
-// @grant        none
+// @grant        GM_getValue
+// @grant        GM_setValue
+// @noframes
 // ==/UserScript==
 (function() {
     'use strict';
